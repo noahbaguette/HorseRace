@@ -1,23 +1,45 @@
+
 using UnityEngine;
 
-public class MOVEMENT_CONTROLLER : MonoBehaviour
-{ 
+public class MovementController : MonoBehaviour
+{
     [SerializeField] private float speed = 10.2f;
     [SerializeField] private Rigidbody rbPlayer;
     [SerializeField] private Vector3 movement;
 
-   
-    void FixedUpdate ()
+    void Update()
     {
-        rbPlayer.AddForce(0.0f, 0.0f, speed);
-        if (Input.)
-        {
+        movement = Vector3.zero;
 
-        }
-        else()
+        if (Input.GetKey(KeyCode.Z))
         {
-²           Vectore3 movement = direction.normalized;
-            transform.position += movement * (Time.deltaTime * speed);
+            
+            movement.z += 1;
         }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            movement.z -= 1;
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            movement.x -= 1;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            movement.x += 1;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 direction = movement.normalized;
+
+        Vector3 newPosition = rbPlayer.position
+            + direction * speed * Time.fixedDeltaTime;
+
+        rbPlayer.MovePosition(newPosition);
     }
 }
